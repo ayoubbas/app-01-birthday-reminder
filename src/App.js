@@ -1,22 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
 import data from "./data";
 import Person from './components/person';
+import { useState } from 'react';
+import NoBirth from './components/noBirth';
 
 console.log(data);
 
 function App() {
+  const [myData , setMyData] = useState(data)
+
   return (
-    <div className='app'>
+    <div className='app extraBold'>
       <div className='container'>
         <div className='title'>
-          <h1><span>29</span> birthdays today</h1>
+          <h1><span>{myData.length}</span> birthdays today</h1>
         </div>
           <div className='items'>
-          {data.map((item)=>{
+
+          {myData.length !==0 ?myData.map((item)=>{
             return <Person item={item} key={item.id} />
-          })}
+          }) : <NoBirth />}
           </div>
+          <button className='btnDele extraBold' onClick={()=>{setMyData("")}}>Delete  All</button>
       </div>
     </div>
   );
