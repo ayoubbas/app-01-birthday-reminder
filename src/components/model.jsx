@@ -3,8 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { TextField } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -13,8 +12,9 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+//   border: '2px solid #eee',
   boxShadow: 24,
+  borderRadius:2,
   p: 4,
 };
 
@@ -41,7 +41,12 @@ export default function TransitionsModal({open,setOpen}) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            
+            <form className='formAddBirth'>
+          <TextField id="outlined-basic" label="Name" variant="outlined" />
+          <TextField id="outlined-basic" label="Age" variant="outlined" />
+          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+
+            </form>
           </Box>
         </Fade>
       </Modal>

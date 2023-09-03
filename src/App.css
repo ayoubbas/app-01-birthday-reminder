@@ -88,3 +88,9 @@ body {
   font-size: 50px;
   color: white;
 }
+
+.formAddBirth {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
