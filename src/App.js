@@ -11,10 +11,12 @@ function App() {
       <div className='container'>
         <div className='title'>
           <h1><span>29</span> birthdays today</h1>
+        </div>
+          <div className='items'>
           {data.map((item)=>{
             return <Person item={item} key={item.id} />
           })}
-        </div>
+          </div>
       </div>
     </div>
   );

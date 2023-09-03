@@ -1,7 +1,7 @@
 *{
   padding: 0;
   margin: 0;
-
+  box-sizing: border-box;
 }
 body{
   background-color: rebeccapurple;
@@ -32,4 +32,23 @@ body{
 .person-parent {
   display: flex;
   align-items: center;
+}
+.title {
+  width: 100%;
+  padding: 20px 0px;
+  text-align: center;
+}
+
+.items{
+  background-color: brown;
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 80%;
+  overflow-y: scroll;
+  
+}
+.items::-webkit-scrollbar{
+  display: none;
 }
