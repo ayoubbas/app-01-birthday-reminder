@@ -94,3 +94,8 @@ body {
   flex-direction: column;
   gap: 10px;
 }
+
+.addItem-title {
+  text-align: center;
+  font-family: "rubik";
+}
