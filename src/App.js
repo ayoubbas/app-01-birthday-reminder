@@ -20,7 +20,7 @@ function App() {
         }}
         className="plusIcon"
       />
-      <TransitionsModal setOpen={setOpen} open={open} />
+      <TransitionsModal setMyData={setMyData} myData={myData} setOpen={setOpen} open={open} />
       <div className="container">
         <div className="title">
           <h1>

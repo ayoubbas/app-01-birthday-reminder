@@ -99,3 +99,7 @@ body {
   text-align: center;
   font-family: "rubik";
 }
+
+.MuiFormControl-root {
+  width: 100%;
+}

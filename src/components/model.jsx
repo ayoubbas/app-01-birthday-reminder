@@ -4,55 +4,14 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { Button, TextField } from "@mui/material";
-import { makeStyles } from '@mui/styles';
-
-
-const useStyles = makeStyles((theme) => ({
-  cssOutlinedInput: {
-    "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline":
-      {
-        borderColor: "red", //default
-      },
-    "&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline": {
-      borderColor: "blue", //hovered
-    },
-    "&$cssFocused $notchedOutline": {
-      borderColor: "purple", //focused
-    },
-  },
-}));
-const styles = (theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-
-  cssLabel: {
-    color: "green",
-  },
-
-  cssOutlinedInput: {
-    "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline":
-      {
-        borderColor: "red", //default
-      },
-    "&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline": {
-      borderColor: "blue", //hovered
-    },
-    "&$cssFocused $notchedOutline": {
-      borderColor: "purple", //focused
-    },
-  },
-  notchedOutline: {},
-  cssFocused: {},
-  error: {},
-  disabled: {},
-});
+import { v4 as uuidv4 } from "uuid";
+// import uuid from 'react-uuid';
+import CalculateAge from "../logic/CalculateAge";
+// date picker import
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const style = {
   position: "absolute",
@@ -67,16 +26,42 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({ open, setOpen }) {
-  //   const [open, setOpen] = React.useState(false);
-  //   const handleOpen = () => setOpen(true);
+export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
+  const id = uuidv4();
+  // const maxDate = new Date().getUTCFullYear()
+  // console.log(maxDate);
+  // const isInCurrentYear = (date) => date.get('year') > maxDate+1;
+  const [newPeaple, setNewPeople] = React.useState({
+    name: "",
+    age: "",
+    image: "",
+    id: id,
+  });
   const handleClose = () => setOpen(false);
-  const classes = useStyles()
-  // const { classes } = styles.props;
+  
+  const addItem = () => {
+    setMyData([...myData, newPeaple]);
+    setOpen(!open);
+    setNewPeople({
+      name: "",
+      age: "",
+      image: "",
+      id: id,
+    });
+  };
+
+  const handleDateChange = (date)=>{
+    const age = CalculateAge(date)
+    console.log(age.year);
+    const years = age.year
+    setNewPeople((prevState) => ({
+      ...prevState,
+      age: years,
+    }));  
+  }
 
   return (
     <div>
-      {/* <Button >Open modal</Button> */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -96,18 +81,43 @@ export default function TransitionsModal({ open, setOpen }) {
               Add New Item
             </h1>
             <br />
-            <form className="formAddBirth">
+            <form className="formAddBirth" style={{width:"100%"}}>
               <TextField
-                className={classes.cssOutlinedInput}
+                value={newPeaple.name}
+                onChange={(e) => {
+                  setNewPeople((prevState) => ({
+                    ...prevState,
+                    name: e.target.value,
+                  }));
+                }}
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
               />
-              <TextField id="outlined-basic" label="Age" variant="outlined" />
-              <TextField id="outlined-basic" label="Image" variant="outlined" />
+              <LocalizationProvider   dateAdapter={AdapterDayjs}>
+                <DemoContainer   components={["DatePicker"]}>
+                  <div style={{width:"100%"}}>
+                  <DatePicker   value={newPeaple.age}  onChange={handleDateChange} label="Enter the Birthday" />
+
+                  </div>
+                </DemoContainer>
+              </LocalizationProvider>
+              <TextField
+                value={newPeaple.image}
+                onChange={(e) => {
+                  setNewPeople((prevState) => ({
+                    ...prevState,
+                    image: e.target.value,
+                  }));
+                }}
+                id="outlined-basic"
+                label="Image"
+                variant="outlined"
+              />
               <Button
                 style={{ backgroundColor: "rebeccapurple" }}
                 variant="contained"
+                onClick={addItem}
               >
                 Add To Reminder
               </Button>
