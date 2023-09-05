@@ -39,7 +39,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
   });
   const handleClose = () => setOpen(false);
   
-  const addItem = () => {
+  const addItem = () => { 
     setMyData([...myData, newPeaple]);
     setOpen(!open);
     setNewPeople({
