@@ -97,7 +97,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
               <LocalizationProvider   dateAdapter={AdapterDayjs}>
                 <DemoContainer   components={["DatePicker"]}>
                   <div style={{width:"100%"}}>
-                  <DatePicker   value={newPeaple.age || ''}  onChange={handleDateChange} label="Enter the Birthday" />
+                  <DatePicker  onChange={handleDateChange} label="Enter the Birthday" />
 
                   </div>
                 </DemoContainer>
