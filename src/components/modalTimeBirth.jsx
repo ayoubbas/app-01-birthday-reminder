@@ -9,44 +9,56 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 700,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
+const styleTimer = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  border: "1px solid black",
+  padding: "20px 10px",
+  fontFamily: "Rubik",
+  borderRadius: "5px",
+  background: "black",
+  color: "white",
+};
+export default function LessTimeBirth({
+  openTime,
+  setOpenTime,
+  myData,
+  itemId,
+  setItemId,
+}) {
+  const [myinter, setMyinter] = React.useState("");
+  const [timeRemaining, setTimeRemaining] = React.useState("");
 
-export default function LessTimeBirth({ openTime, setOpenTime, myData, itemId,setItemId }) {
-   const person= myData.find((item)=>item.id=== itemId)
-   console.log(person);
-   
-   const [timeRemaining, setTimeRemaining] = React.useState("");
-   const [myinter, setMyinter] = React.useState("");
-   
-   React.useEffect(() => {
-    // console.log(itemId);
-      if(person){
-    //    console.log(person);
-       const dates = person.year+"-"+person.month+"-"+person.day
-       console.log(dates + "aaaa");
-       setTimeRemaining(RemainingTime(dates))
+  const [person, setPerson] = React.useState(null);
+  const per = myData.find((item) => item.id === itemId);
 
-
-       const myInter = setInterval(() => {
-         setTimeRemaining(RemainingTime(dates));
-       }, 1000);
-       setMyinter(myInter)
-       return () => clearInterval(myInter);
-       
-      }else{
-        clearInterval(myinter)
+  React.useEffect(() => {
+    if (openTime) {
+      console.log(person);
+      setPerson(per);
+      if (person) {
+        const dates = person.year + "-" + person.month + "-" + person.day;
+        setTimeRemaining(RemainingTime(dates));
+        const myInter = setInterval(() => {
+          setTimeRemaining(RemainingTime(dates));
+        }, 1000);
+        setMyinter(myInter);
+        return () => clearInterval(myInter);
+      } else {
+        clearInterval(myinter);
       }
-  }, [person,itemId]);
-//   console.log(item);
+    }
+  }, [openTime, per, person]);
   const handleCloseTime = () => {
-    setOpenTime(false)
-    setItemId("")
-    // clearInterval(myinter)
+    setOpenTime(false);
+    setItemId(null);
   };
 
   return (
@@ -59,12 +71,29 @@ export default function LessTimeBirth({ openTime, setOpenTime, myData, itemId,se
       >
         <Box sx={style}>
           <div>
-            <h1>Countdown Timer</h1>
-            <div>
-              <p>Days: {timeRemaining.days}</p>
-              <p>Hours: {timeRemaining.hours}</p>
-              <p>Minutes: {timeRemaining.minutes}</p>
-              <p>Seconds: {timeRemaining.seconds}</p>
+            <h1
+              style={{
+                fontSize: "24px",
+                textAlign: "center",
+                marginBottom: "20px",
+              }}
+            >
+              Countdown to <span style={{color:"gray"}}>{person ? person.name : ""}</span>'s Birthday
+              Celebration!
+            </h1>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <p style={styleTimer}>
+                <span>Days:</span> <span>{timeRemaining.days}</span>
+              </p>
+              <p style={styleTimer}>
+                <span>Hours</span> <span>{timeRemaining.hours}</span>
+              </p>
+              <p style={styleTimer}>
+                <span>Minutes:</span> <span>{timeRemaining.minutes}</span>{" "}
+              </p>
+              <p style={styleTimer}>
+                <span>Seconds:</span> <span>{timeRemaining.seconds}</span>{" "}
+              </p>
             </div>
           </div>
         </Box>

@@ -29,6 +29,10 @@ const style = {
 export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
   const id = uuidv4();
 
+  const [field1Error, setField1Error] = React.useState(false);
+  const [field2Error, setField2Error] = React.useState(false);
+  const [field3Error, setField3Error] = React.useState(false);
+
   const [newPeaple, setNewPeople] = React.useState({
     name: "",
     age: "",
@@ -38,20 +42,47 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
     day: "",
     year: "",
   });
+  const checkError = () => {
+    if (newPeaple.name === "") {
+      setField1Error(true);
+    }if(newPeaple.name !== ""){
+      setField1Error(false)
+
+    }
+    if (newPeaple.age === "") {
+      setField2Error(true);
+    }
+    if (newPeaple.age !== "") {
+      setField2Error(false);
+    }
+    if (newPeaple.image === "") {
+      setField3Error(true);
+    }
+    if (newPeaple.image !== "") {
+      setField3Error(false);
+    }
+  };
   const handleClose = () => setOpen(false);
 
   const addItem = () => {
-    setMyData([...myData, newPeaple]);
-    setOpen(!open);
-    setNewPeople({
-      name: "",
-      age: "",
-      image: "",
-      id: id,
-      month: "",
-      day: "",
-      year: "",
-    });
+    checkError();
+    if (
+      newPeaple.name !== "" &&
+      newPeaple.age !== "" &&
+      newPeaple.image !== ""
+    ) {
+      setMyData([...myData, newPeaple]);
+      setOpen(!open);
+      setNewPeople({
+        name: "",
+        age: "",
+        image: "",
+        id: id,
+        month: "",
+        day: "",
+        year: "",
+      });
+    }
   };
 
   const handleDateChange = (date) => {
@@ -89,6 +120,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
             <br />
             <form className="formAddBirth" style={{ width: "100%" }}>
               <TextField
+                error={field1Error}
                 value={newPeaple.name}
                 onChange={(e) => {
                   setNewPeople((prevState) => ({
@@ -102,7 +134,12 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
               />
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
-                  <div style={{ width: "100%" }}>
+                  <div
+                    className={
+                      field2Error ? "date-picker error " : "date-picker"
+                    }
+                    style={{ width: "100%" }}
+                  >
                     <DatePicker
                       onChange={handleDateChange}
                       label="Enter the Birthday"
@@ -112,6 +149,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
                 </DemoContainer>
               </LocalizationProvider>
               <TextField
+                error={field3Error}
                 value={newPeaple.image}
                 onChange={(e) => {
                   setNewPeople((prevState) => ({

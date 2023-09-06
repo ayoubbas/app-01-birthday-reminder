@@ -104,3 +104,8 @@ body {
 .MuiFormControl-root {
   width: 100%;
 }
+
+
+.date-picker.error {
+  border: 1px solid red; /* Adjust the border style as needed */
+}
