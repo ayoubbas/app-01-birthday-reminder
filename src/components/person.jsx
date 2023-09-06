@@ -9,9 +9,11 @@ const [itemId,setItemId]=useState("")
   return (
 
     <div id={item.id} onClick={()=>{
-      setItemId(item)
+      setItemId(item.id)
+      console.log(item.id);
+      console.log(itemId);
       setOpenTime(!openTime)}}  className='person-parent extraBold'>
-      <LessTimeBirth item={itemId} myData={myData} setOpenTime={setOpenTime} openTime={openTime}  />
+      <LessTimeBirth setItemId={setItemId} itemId={itemId} myData={myData} setOpenTime={setOpenTime} openTime={openTime}  />
 
         <img src={item.image} alt="" className='img-person'/>
         <div className="name">

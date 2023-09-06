@@ -16,21 +16,33 @@ const style = {
   p: 4,
 };
 
-export default function LessTimeBirth({ openTime, setOpenTime, myData, item }) {
-  const [timeRemaining, setTimeRemaining] = React.useState(RemainingTime());
-
-  React.useEffect(() => {
+export default function LessTimeBirth({ openTime, setOpenTime, myData, itemId,setItemId }) {
+   const person= myData.find((item)=>item.id=== itemId)
+   console.log(person);
+   
+   const [timeRemaining, setTimeRemaining] = React.useState(RemainingTime());
+   
+   React.useEffect(() => {
+    console.log(itemId);
+      if(person){
+       console.log(person);
+       const dates = person.year+"-"+person.month+"-"+person.day 
+       setTimeRemaining(dates)
+      }
     const myInter = setInterval(() => {
-      setTimeRemaining(RemainingTime);
+        const Update = RemainingTime()
+      setTimeRemaining(Update);
     }, 1000);
     return () => clearInterval(myInter);
-  }, [RemainingTime]);
-  console.log(item);
-  const handleCloseTime = () => setOpenTime(false);
+  }, [person,itemId]);
+//   console.log(item);
+  const handleCloseTime = () => {
+    setOpenTime(false)
+    setItemId("")
+  };
 
   return (
     <div>
-      {/* <Button onClick={handleOpenTime}>Open modal</Button> */}
       <Modal
         open={openTime}
         onClose={handleCloseTime}
