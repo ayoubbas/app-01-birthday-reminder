@@ -34,6 +34,7 @@ body {
 .person-parent {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .title {
   width: 100%;

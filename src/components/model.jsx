@@ -38,8 +38,8 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
     id: id,
   });
   const handleClose = () => setOpen(false);
-  
-  const addItem = () => { 
+
+  const addItem = () => {
     setMyData([...myData, newPeaple]);
     setOpen(!open);
     setNewPeople({
@@ -50,15 +50,15 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
     });
   };
 
-  const handleDateChange = (date)=>{
-    const age = CalculateAge(date)
+  const handleDateChange = (date) => {
+    const age = CalculateAge(date);
     console.log(age.year);
-    const years = age.year
+    const years = age.year;
     setNewPeople((prevState) => ({
       ...prevState,
       age: years,
-    }));  
-  }
+    }));
+  };
 
   return (
     <div>
@@ -81,7 +81,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
               Add New Item
             </h1>
             <br />
-            <form className="formAddBirth" style={{width:"100%"}}>
+            <form className="formAddBirth" style={{ width: "100%" }}>
               <TextField
                 value={newPeaple.name}
                 onChange={(e) => {
@@ -94,11 +94,13 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
                 label="Name"
                 variant="outlined"
               />
-              <LocalizationProvider   dateAdapter={AdapterDayjs}>
-                <DemoContainer   components={["DatePicker"]}>
-                  <div style={{width:"100%"}}>
-                  <DatePicker  onChange={handleDateChange} label="Enter the Birthday" />
-
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <div style={{ width: "100%" }}>
+                    <DatePicker
+                      onChange={handleDateChange}
+                      label="Enter the Birthday"
+                    />
                   </div>
                 </DemoContainer>
               </LocalizationProvider>

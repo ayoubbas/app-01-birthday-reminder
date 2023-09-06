@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Person = ({item}) => {
+const Person = ({item ,setOpenTime,openTime}) => {
   return (
-    <div className='person-parent extraBold'>
+    <div onClick={()=>{
+      console.log(openTime);
+      setOpenTime(!openTime)}}  className='person-parent extraBold'>
         <img src={item.image} alt="" className='img-person'/>
         <div className="name">
             <p className='personName'>{item.name}</p>
