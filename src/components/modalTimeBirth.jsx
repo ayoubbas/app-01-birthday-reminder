@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import RemainingTime from '../logic/timeRemaining';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -18,6 +18,8 @@ const style = {
 
 export default function LessTimeBirth({openTime,setOpenTime}) {
 //   const handleOpenTime = () => setOpenTime(true);
+const time = RemainingTime()
+console.log(time);
   const handleCloseTime = () => setOpenTime(false);
 
   return (

@@ -36,6 +36,9 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
     age: "",
     image: "",
     id: id,
+    month: "",
+    day: "",
+    year: "",
   });
   const handleClose = () => setOpen(false);
 
@@ -47,16 +50,25 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
       age: "",
       image: "",
       id: id,
+      month: "",
+      day: "",
+      year: "",
     });
   };
 
   const handleDateChange = (date) => {
     const age = CalculateAge(date);
-    console.log(age.year);
+
+    console.log(date);
+    console.log(date.$M + 1);
+    console.log(date.$D);
     const years = age.year;
     setNewPeople((prevState) => ({
       ...prevState,
       age: years,
+      month: date.$M + 1,
+      day: date.$D,
+      year: date.$y,
     }));
   };
 
@@ -100,6 +112,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
                     <DatePicker
                       onChange={handleDateChange}
                       label="Enter the Birthday"
+                      dateFormat="MM-DD-YYYY"
                     />
                   </div>
                 </DemoContainer>
