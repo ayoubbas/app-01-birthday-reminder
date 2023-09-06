@@ -28,9 +28,7 @@ const style = {
 
 export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
   const id = uuidv4();
-  // const maxDate = new Date().getUTCFullYear()
-  // console.log(maxDate);
-  // const isInCurrentYear = (date) => date.get('year') > maxDate+1;
+
   const [newPeaple, setNewPeople] = React.useState({
     name: "",
     age: "",
@@ -58,10 +56,6 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
 
   const handleDateChange = (date) => {
     const age = CalculateAge(date);
-
-    console.log(date);
-    console.log(date.$M + 1);
-    console.log(date.$D);
     const years = age.year;
     setNewPeople((prevState) => ({
       ...prevState,

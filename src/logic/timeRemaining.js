@@ -1,5 +1,5 @@
 const RemainingTime = () => {
-  const birthday = new Date("1997-09-20");
+  const birthday = new Date("");
   const dateNow = new Date();
   const currentYear = dateNow.getFullYear();
   birthday.setFullYear(currentYear);
@@ -21,6 +21,7 @@ const RemainingTime = () => {
     hours,
     minutes,
     seconds,
+    
   };
 };
 

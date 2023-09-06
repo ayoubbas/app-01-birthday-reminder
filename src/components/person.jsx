@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import LessTimeBirth from './modalTimeBirth';
 
-const Person = ({item ,setOpenTime,openTime}) => {
+const Person = ({item,myData }) => {
+  const [openTime, setOpenTime] = useState(false);
+const [itemId,setItemId]=useState("")
+
+
   return (
-    <div onClick={()=>{
-      console.log(openTime);
+
+    <div id={item.id} onClick={()=>{
+      setItemId(item)
       setOpenTime(!openTime)}}  className='person-parent extraBold'>
+      <LessTimeBirth item={itemId} myData={myData} setOpenTime={setOpenTime} openTime={openTime}  />
+
         <img src={item.image} alt="" className='img-person'/>
         <div className="name">
             <p className='personName'>{item.name}</p>
