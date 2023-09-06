@@ -1,5 +1,6 @@
 const RemainingTime = (dates) => {
   const birthday = new Date(dates);
+  console.log(dates + "aaaa");
   const dateNow = new Date();
   const currentYear = dateNow.getFullYear();
   birthday.setFullYear(currentYear);

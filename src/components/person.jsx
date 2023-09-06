@@ -10,8 +10,8 @@ const [itemId,setItemId]=useState("")
 
     <div id={item.id} onClick={()=>{
       setItemId(item.id)
-      console.log(item.id);
-      console.log(itemId);
+      // console.log(item.id);
+      // console.log(itemId);
       setOpenTime(!openTime)}}  className='person-parent extraBold'>
       <LessTimeBirth setItemId={setItemId} itemId={itemId} myData={myData} setOpenTime={setOpenTime} openTime={openTime}  />
 

@@ -20,25 +20,33 @@ export default function LessTimeBirth({ openTime, setOpenTime, myData, itemId,se
    const person= myData.find((item)=>item.id=== itemId)
    console.log(person);
    
-   const [timeRemaining, setTimeRemaining] = React.useState(RemainingTime());
+   const [timeRemaining, setTimeRemaining] = React.useState("");
+   const [myinter, setMyinter] = React.useState("");
    
    React.useEffect(() => {
-    console.log(itemId);
+    // console.log(itemId);
       if(person){
-       console.log(person);
-       const dates = person.year+"-"+person.month+"-"+person.day 
-       setTimeRemaining(dates)
+    //    console.log(person);
+       const dates = person.year+"-"+person.month+"-"+person.day
+       console.log(dates + "aaaa");
+       setTimeRemaining(RemainingTime(dates))
+
+
+       const myInter = setInterval(() => {
+         setTimeRemaining(RemainingTime(dates));
+       }, 1000);
+       setMyinter(myInter)
+       return () => clearInterval(myInter);
+       
+      }else{
+        clearInterval(myinter)
       }
-    const myInter = setInterval(() => {
-        const Update = RemainingTime()
-      setTimeRemaining(Update);
-    }, 1000);
-    return () => clearInterval(myInter);
   }, [person,itemId]);
 //   console.log(item);
   const handleCloseTime = () => {
     setOpenTime(false)
     setItemId("")
+    // clearInterval(myinter)
   };
 
   return (

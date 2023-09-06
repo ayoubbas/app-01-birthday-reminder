@@ -1,18 +1,24 @@
 export default [
-  // {
-  //   id: 1,
-  //   name: "Bertie Yates",
-  //   age: 29,
-  //   image:
-  //     "https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-2_ipcjws.jpg",
-  // },
-  // {
-  //   id: 2,
-  //   name: "Hester Hogan",
-  //   age: 32,
-  //   image:
-  //     "https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-3_rxtqvi.jpg",
-  // },
+  {
+    id: 1,
+    name: "Bertie Yates",
+    age: 29,
+    image:
+      "https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-2_ipcjws.jpg",
+      month: "02",
+      day: "15",
+      year: "2001",
+  },
+  {
+    id: 2,
+    name: "Hester Hogan",
+    age: 32,
+    image:
+      "https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-3_rxtqvi.jpg",
+      month: "09",
+      day: "20",
+      year: "1997",
+  },
   // {
   //   id: 3,
   //   name: "Larry Little",
