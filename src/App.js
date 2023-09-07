@@ -5,37 +5,42 @@ import { useEffect, useState } from "react";
 import NoBirth from "./components/noBirth";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import TransitionsModal from "./components/model";
-import{app} from "./firebase"
+import { specialeName } from "./firebase";
+import { app, db } from "./firebase";
 import { getDatabase, ref, onValue, set } from "firebase/database";
+
+import { collection, addDoc } from "firebase/firestore";
+
 function App() {
   const [myData, setMyData] = useState(data);
   const [open, setOpen] = useState(false);
-  const database = getDatabase(app);
-  const arrayRef = ref(database,myData);
 
-  useEffect(() => {
-    onValue(arrayRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        setMyData(data); // Update your state with the data from Firebase
-      }
-    });
-  }, [arrayRef]);
-
-  useEffect(() => {
-    // Update Firebase with the new array whenever it changes
-    arrayRef.set(myData);
-  }, [myData, arrayRef]);
+  const datas = () => {
+    const dbref = collection(db, "people");
+    addDoc(dbref, myData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="app extraBold">
       <AiOutlinePlusCircle
         onClick={() => {
           setOpen(!open);
+          datas();
         }}
         className="plusIcon"
       />
-      <TransitionsModal setMyData={setMyData} myData={myData} setOpen={setOpen} open={open} />
+      <TransitionsModal
+        setMyData={setMyData}
+        myData={myData}
+        setOpen={setOpen}
+        open={open}
+      />
       <div className="container">
         <div className="title">
           <h1>
@@ -45,7 +50,7 @@ function App() {
         <div className="items">
           {myData.length !== 0 ? (
             myData.map((item) => {
-              return <Person myData={myData} item={item} key={item.id}  />;
+              return <Person myData={myData} item={item} key={item.id} />;
             })
           ) : (
             <NoBirth />
