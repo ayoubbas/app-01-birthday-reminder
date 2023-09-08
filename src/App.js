@@ -12,31 +12,47 @@ import { getDatabase, ref, onValue, set } from "firebase/database";
 import { collection, addDoc } from "firebase/firestore";
 
 function App() {
-  const [myData, setMyData] = useState(data);
+  const [myData, setMyData] = useState([]);
+  const [newPerson, setNewperson] = useState("");
   const [open, setOpen] = useState(false);
 
   const datas = () => {
+    // const dataObject = {};
+    // myData.forEach((item, index) => {
+    //   dataObject[index] = item;
+    // });
+    // if(newPerson!==""){
     const dbref = collection(db, "people");
-    addDoc(dbref, myData)
+      addDoc(dbref, newPerson)
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
+    // }
   };
+
+  useEffect(() => {
+if(newPerson!==""){
+  datas();
+
+  setMyData([...myData,newPerson])
+}
+    console.log(newPerson);
+  }, [newPerson]);
 
   return (
     <div className="app extraBold">
       <AiOutlinePlusCircle
         onClick={() => {
           setOpen(!open);
-          datas();
+          console.log(myData);
         }}
         className="plusIcon"
       />
       <TransitionsModal
-        setMyData={setMyData}
+        setNewperson={setNewperson}
         myData={myData}
         setOpen={setOpen}
         open={open}

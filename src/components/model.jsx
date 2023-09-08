@@ -26,7 +26,7 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
+export default function TransitionsModal({ open, setOpen, myData,setNewperson }) {
   const id = uuidv4();
 
   const [field1Error, setField1Error] = React.useState(false);
@@ -71,7 +71,7 @@ export default function TransitionsModal({ open, setOpen, myData, setMyData }) {
       newPeaple.age !== "" &&
       newPeaple.image !== ""
     ) {
-      setMyData([...myData, newPeaple]);
+      setNewperson(newPeaple);
       setOpen(!open);
       setNewPeople({
         name: "",
